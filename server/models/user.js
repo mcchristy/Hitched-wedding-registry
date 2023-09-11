@@ -4,6 +4,11 @@ const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
 const Order = require('./Order');
 
+const express = require('express');
+
+const router = express.Router();
+const nodemailer = require('nodemailer');
+
 const userSchema = new Schema({
   firstName: {
     type: String,
@@ -46,3 +51,8 @@ userSchema.methods.isCorrectPassword = async function(password) {
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
+
+// forgot password 
+userSchema.methods.forgotpassword= async function(forgotpassword) {
+ if router:routerpost('/forgot-password', async (req, res) => {
+      const { email } = req.body; } }
