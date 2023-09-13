@@ -25,6 +25,11 @@ const userSchema = new Schema({
     required: true,
     minlength: 5
   },
+  registryTitle: {
+    type: String,
+    required: true,
+    trim: true
+  },
   orders: [Order.schema]
 });
 

@@ -1,6 +1,7 @@
-const User = require('./User');
-const Product = require('./Product');
-const Seller = require('./Seller');
-const Order = require('./Order');
+const User = require('./user');
+const Profile = require('./profile');
+const Registry = require('./registry');
+const RegistryItem = require('./registryItem');
+const Notification = require('./notification');
 
-module.exports = { User, Product, Seller, Order };
+module.exports = { User, Profile, Registry, RegistryItem, Notification };
