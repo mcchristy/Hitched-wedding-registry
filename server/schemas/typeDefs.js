@@ -1,33 +1,48 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-  type Category {
-    _id: ID
-    name: String
-  }
-
-  type Product {
-    _id: ID
-    name: String
-    description: String
-    image: String
-    quantity: Int
-    price: Float
-    category: Category
-  }
-
-  type Order {
-    _id: ID
-    purchaseDate: String
-    products: [Product]
-  }
-
   type User {
     _id: ID
     firstName: String
     lastName: String
     email: String
+    password: String
+    registryTitle: String
     orders: [Order]
+  }
+
+  type Notification {
+    _id: ID
+    message: String
+    registryItem: registryItem
+    user: User
+    createdAt: Date
+    isRead: Boolean
+  }
+
+  type Profile {
+    _id: ID
+    user: User
+    brideName: String
+    groomName: String
+    registryTitle: String
+    weddingDate: String
+    registryItems: [{product: RegistryItem, quantity: Int}]
+  }
+
+  type Registry {
+    registryName: String
+    registryType: String
+    eventDate: String
+    registryItems: [{product: RegistryItem, quantity: Int}]
+    couple: User
+  }
+
+  type RegistryItem {
+    _id: ID
+    name: String
+    price: Number
+    registry: Registry
   }
 
   type Checkout {
@@ -40,19 +55,20 @@ const typeDefs = gql`
   }
 
   type Query {
-    categories: [Category]
-    products(category: ID, name: String): [Product]
-    product(_id: ID!): Product
+    registries: [Registries]
+    registry(_id: ID!): Registry
+    registryItem(_id: ID!): RegistryItem
     user: User
-    order(_id: ID!): Order
+    profile: Profile
+    notification(_id: ID!): Notification
     checkout(products: [ID]!): Checkout
   }
 
   type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!, registryTitle: String!): Auth
     addOrder(products: [ID]!): Order
-    updateUser(firstName: String, lastName: String, email: String, password: String): User
-    updateProduct(_id: ID!, quantity: Int!): Product
+    updateUser(firstName: String, lastName: String, email: String, password: String, registryTitle: String): User
+    updateRegistryItem(_id: ID!, quantity: Int!): RegistryItem
     login(email: String!, password: String!): Auth
   }
 `;
