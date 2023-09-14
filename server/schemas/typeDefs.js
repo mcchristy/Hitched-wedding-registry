@@ -59,7 +59,7 @@ const typeDefs = gql`
     registry(_id: ID!): Registry
     registryItem(_id: ID!): RegistryItem
     user: User
-    profile: Profile
+    profile(_id: ID!): Profile
     notification(_id: ID!): Notification
     checkout(products: [ID]!): Checkout
   }

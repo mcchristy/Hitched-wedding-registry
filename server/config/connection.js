@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 // MongoDB connection URL from environment variables
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/weddingRegistry';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/hitched_db';
 
 // Configure and establish the MongoDB connection
 mongoose.connect(MONGODB_URI, {
