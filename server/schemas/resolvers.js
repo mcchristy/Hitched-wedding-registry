@@ -1,57 +1,38 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Product, Category, Order } = require('../models');
+const { User, Notification, Profile, Registry, RegistryItem } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
+  // TODO: figure out if any of these need to call the populate() function
   Query: {
-    categories: async () => {
-      return await Category.find();
+    registries: async () => {
+      return await Registry.find();
     },
-    products: async (parent, { category, name }) => {
-      const params = {};
-
-      if (category) {
-        params.category = category;
-      }
-
-      if (name) {
-        params.name = {
-          $regex: name
-        };
-      }
-
-      return await Product.find(params).populate('category');
+    registry: async(parent, { _id }) => {
+      return await Registry.findById(_id);
     },
-    product: async (parent, { _id }) => {
-      return await Product.findById(_id).populate('category');
+    registryItem: async (parent, { _id }) => {
+      return await RegistryItem.findById(_id);
     },
     user: async (parent, args, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
-        });
+        const user = await User.findById(context.user._id);
 
-        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+        //user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
 
         return user;
       }
 
       throw new AuthenticationError('Not logged in');
     },
-    order: async (parent, { _id }, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
-        });
-
-        return user.orders.id(_id);
-      }
-
-      throw new AuthenticationError('Not logged in');
+    profile: async (parent, { _id }) => {
+      return await Profile.findById(_id);
     },
+    notification: async (parent, { _id }) => {
+      return await Notificaation.findById(_id);
+    },
+    // Is this even going to be used?
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       const order = new Order({ products: args.products });
