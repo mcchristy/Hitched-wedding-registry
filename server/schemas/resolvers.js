@@ -30,7 +30,7 @@ const resolvers = {
       return await Profile.findById(_id);
     },
     notification: async (parent, { _id }) => {
-      return await Notificaation.findById(_id);
+      return await Notification.findById(_id);
     },
     // Is this even going to be used?
     checkout: async (parent, args, context) => {
@@ -77,18 +77,6 @@ const resolvers = {
 
       return { token, user };
     },
-    addOrder: async (parent, { products }, context) => {
-      console.log(context);
-      if (context.user) {
-        const order = new Order({ products });
-
-        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
-
-        return order;
-      }
-
-      throw new AuthenticationError('Not logged in');
-    },
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, { new: true });
@@ -96,10 +84,18 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    updateProduct: async (parent, { _id, quantity }) => {
-      const decrement = Math.abs(quantity) * -1;
+    addRegistryItem: async (parent, args) => {
+      const registryItem = await RegistryItem.create(args);
+      const token = signToken(registryItem);
 
-      return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
+      return { token, registryItem };
+    },
+    updateRegistryItem: async (parent, args, context) => {
+      if (context.registryItem) { // context.user?, remove if-statement?
+        return await RegistryItem.findByIdAndUpdate(context.RegistryItem._id, args, { new: true });
+      }
+
+      throw new AuthenticationError('Not logged in');
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
