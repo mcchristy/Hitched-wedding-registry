@@ -1,5 +1,5 @@
 import React from 'react';
-import coupleImage from '../../public/images/couple.jpg';
+/// import coupleImage from '../../public/images/engaged.jpg';
 
 function UserProfile() {
 
@@ -12,8 +12,7 @@ function UserProfile() {
 
   return (
     <div className="user-profile">
-      <h2>User Profile</h2>
-      <img src={coupleImage} alt="Couple" width="300" height="300" />
+      {/* <h2>User Profile</h2><img src={coupleImage} alt="Couple" width="300" height="300" /> */}
       <div className="profile-details">
         <p>
           <strong>First Name:</strong> {userProfile.firstName}
