@@ -21,7 +21,6 @@ function LoginPage() {
   const handleLogin = (e) => {
     e.preventDefault();
     console.log('Login form submitted with data:', formData);
-    // Reset the form fields (optional)
     setFormData({
       email: '',
       password: '',
