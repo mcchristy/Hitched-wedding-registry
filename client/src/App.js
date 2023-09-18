@@ -9,13 +9,11 @@ function App() {
   return (
     <Router>
       <div>
-        {/* Add a navigation bar or header component here if needed */}
         <Switch>
-          <Route path="/signup" component={SignupPage} />
+          <Route path="/signup" exact component={SignupPage} />
           <Route path="/login" component={LoginPage} />
           <Route path="/registry" component={RegistryPage} />
           <Route path="/profile" component={UserProfilePage} />
-          {/* Add more routes for other pages */}
         </Switch>
       </div>
     </Router>
