@@ -1,14 +1,14 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
-const { authMiddleware } = require('./utils/auth');
+const { authMiddleware } = require('./server/utils/auth');
 
 // require('dotenv').config();
 
-const { typeDefs, resolvers } = require('./schemas');
-const db = require('./config/connection');
+const { typeDefs, resolvers } = require('./server/schemas');
+const db = require('./server/config/connection');
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 const app = express();
 const server = new ApolloServer({
   typeDefs,
@@ -24,8 +24,13 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
+    res.send('Wedding Registry');
+  });
+
+// Serve up static assets
+const script=("/static/js/main.js")
+const express = require('express');
+app.use(express.static('public'));
 
 
 // Create a new instance of an Apollo server with the GraphQL schema

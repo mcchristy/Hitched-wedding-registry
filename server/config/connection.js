@@ -10,11 +10,13 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/hitche
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
+//  useCreateIndex: true,
+ // useFindAndModify: false,
 });
 
 const db = mongoose.connection;
+const mongoose = require('mongoose');
+
 
 // Event listeners for MongoDB connection
 db.on('error', (error) => {
@@ -26,3 +28,7 @@ db.once('open', () => {
 });
 
 module.exports = db;
+
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/googlebooks');
+
+module.exports = mongoose.connection;
