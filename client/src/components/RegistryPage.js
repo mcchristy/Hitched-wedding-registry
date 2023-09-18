@@ -6,7 +6,7 @@ function RegistryPage() {
   const singleRegistry = {
     id: 1,
     name: 'Your Wedding Registry',
-    // Add other registry details as needed
+   
   };
 
   return (
@@ -21,7 +21,6 @@ function RegistryPage() {
         <li>
           <strong>Name:</strong> {singleRegistry.name}
         </li>
-        {/* Add other registry details as needed */}
       </ul>
       <Link to={`/registry/${singleRegistry.id}`}>View Registry</Link>
     </div>

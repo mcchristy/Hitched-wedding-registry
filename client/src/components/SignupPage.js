@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Signup() {
-  // State for storing user registration data
+  
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -11,7 +11,7 @@ function Signup() {
     registryTitle: '',
   });
 
-  // Handle input changes
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -20,12 +20,12 @@ function Signup() {
     });
   };
 
-  // Handle form submission (user registration)
+
   const handleSignup = (e) => {
     e.preventDefault();
-    // Add your signup logic here, e.g., sending a registration request to the server
+   
     console.log('Signup form submitted with data:', formData);
-    // Reset the form fields (optional)
+   
     setFormData({
       firstName: '',
       lastName: '',
