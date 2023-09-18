@@ -1,13 +1,30 @@
 const { AuthenticationError } = require('apollo-server-express');
+
 const { User, Profile, Registry, RegistryItem, Notification } = require('../models');
 const { signToken } = require('../utils/auth');
 // const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 const resolvers = {
+  // TODO: figure out if any of these need to call the populate() function
   Query: {
 
     user: async (_, args, context) => {
 
       const { userId } = context;
+
+//     registries: async () => {
+//       return await Registry.find();
+//     },
+//     registry: async(parent, { _id }) => {
+//       return await Registry.findById(_id);
+//     },
+//     registryItem: async (parent, { _id }) => {
+//       return await RegistryItem.findById(_id);
+//     },
+//     user: async (parent, args, context) => {
+//       if (context.user) {
+//         const user = await User.findById(context.user._id);
+
+        //user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
 
       try {
         const user = await User.findById(userId);
@@ -16,6 +33,13 @@ const resolvers = {
         throw new Error('Failed to fetch user profile');
       }
     },
+
+//     profile: async (parent, { _id }) => {
+//       return await Profile.findById(_id);
+//     },
+//     notification: async (parent, { _id }) => {
+//       return await Notificaation.findById(_id);
+//     },
 
   },
 }
