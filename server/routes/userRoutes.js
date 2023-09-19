@@ -89,7 +89,7 @@ router.post(
   }
 );
 
-router.delete('/', auth, async (req, res) => {
+router.delete('/', auth.authMiddleware, async (req, res) => {
   try {
    
     await User.findOneAndRemove({ _id: req.user.id });

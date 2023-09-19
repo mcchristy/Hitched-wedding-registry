@@ -22,13 +22,15 @@ app.use(express.json());
 const userRoutes = require('./routes/userRoutes');
 app.use('/users', userRoutes);
 
-app.get('/', (req, res) => {
-    res.send('Wedding Registry');
+  app.use('/images', express.static(path.join(__dirname, '../client/images')));
+
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/build')));
+  }
+  
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
   });
-
-// Serve up static assets
-//test 
-
 
 const startApolloServer = async () => {
     await server.start();
