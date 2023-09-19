@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Signup() {
-  
+  const history = useHistory();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -33,6 +33,7 @@ function Signup() {
       password: '',
       registryTitle: '',
     });
+    history.push('/profile');
   };
 
   return (
