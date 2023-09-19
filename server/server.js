@@ -19,12 +19,15 @@ const server = new ApolloServer({
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+const userRoutes = require('./routes/userRoutes');
+app.use('/users', userRoutes);
+
 app.get('/', (req, res) => {
     res.send('Wedding Registry');
   });
 
 // Serve up static assets
-
+//test 
 
 
 const startApolloServer = async () => {
