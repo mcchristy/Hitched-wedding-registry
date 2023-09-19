@@ -1,12 +1,12 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
-const { authMiddleware } = require('./server/utils/auth');
+const { authMiddleware } = require('./utils/auth');
 
 // require('dotenv').config();
 
-const { typeDefs, resolvers } = require('./server/schemas');
-const db = require('./server/config/connection');
+const { typeDefs, resolvers } = require('./schemas');
+const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3002;
 const app = express();
@@ -19,19 +19,28 @@ const server = new ApolloServer({
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+<<<<<<< HEAD:server.js
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
+=======
+const userRoutes = require('./routes/userRoutes');
+app.use('/users', userRoutes);
+>>>>>>> 70577ff6b84cac2b25eef5286bde8f81bdac7204:server/server.js
 
 app.get('/', (req, res) => {
     res.send('Wedding Registry');
   });
 
 // Serve up static assets
+<<<<<<< HEAD:server.js
 const script=("/static/js/main.js")
 const express = require('express');
 app.use(express.static('public'));
 
+=======
+//test 
+>>>>>>> 70577ff6b84cac2b25eef5286bde8f81bdac7204:server/server.js
 
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
