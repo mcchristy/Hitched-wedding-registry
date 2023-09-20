@@ -75,4 +75,4 @@ We welcome contributions from the community. If you find any issues or have idea
 
 ## Deployed linked
 https://hitched-registry-483e130d2424.herokuapp.com/
-
+<img width="1440" alt="Screenshot 2023-09-20 at 7 40 43 PM" src="https://github.com/mcchristy/Hitched-wedding-registry/assets/128756303/a28b67c5-e051-4fa4-b4fb-6e8338e3abff">
